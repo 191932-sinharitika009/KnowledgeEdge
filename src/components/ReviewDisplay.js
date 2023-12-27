@@ -1,22 +1,23 @@
 import React from 'react';
-import { Typography, Card, CardContent } from '@material-ui/core';
+import { Typography, Card, CardContent } from '@mui/material';
 import { motion } from 'framer-motion';
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/system';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(4),
-    backgroundColor: theme.palette.background.default,
-    textAlign: 'center',
-  },
-  card: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: theme.spacing(2),
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
+// Replace makeStyles with styled
+const ReviewDisplaysContainer = styled('div')(({ theme }) => ({
+  padding: theme.spacing(4),
+  backgroundColor: theme.palette.background.default,
+  textAlign: 'center',
+}));
+
+const ReviewCard = styled(Card)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  marginBottom: theme.spacing(2),
+}));
+
+const ReviewCardContent = styled(CardContent)(({ theme }) => ({
+  flexGrow: 1,
 }));
 
 const reviewsData = [
@@ -26,8 +27,6 @@ const reviewsData = [
 ];
 
 const ReviewDisplays = () => {
-  const classes = useStyles();
-
   const containerVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
@@ -41,7 +40,7 @@ const ReviewDisplays = () => {
   return (
     <motion.div
       id="reviewDisplay"
-      className={classes.root}
+      as={ReviewDisplaysContainer} // Use the styled container component
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -51,16 +50,16 @@ const ReviewDisplays = () => {
       </Typography>
       {reviewsData.map((review, index) => (
         <motion.div variants={cardVariants} initial="hidden" animate="visible" key={index}>
-          <Card className={classes.card}>
-            <CardContent className={classes.cardContent}>
+          <ReviewCard>
+            <ReviewCardContent>
               <Typography variant="h6" component="div">
                 {review.name}
               </Typography>
               <Typography variant="body2" color="textSecondary">
                 {review.review}
               </Typography>
-            </CardContent>
-          </Card>
+            </ReviewCardContent>
+          </ReviewCard>
         </motion.div>
       ))}
     </motion.div>
