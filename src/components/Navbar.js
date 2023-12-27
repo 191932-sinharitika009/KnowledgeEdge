@@ -1,30 +1,24 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { styled } from '@mui/system';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    flexGrow: 1,
-  },
+// Replace makeStyles with styled
+const MyNavbarContainer = styled('div')(({ theme }) => ({
+  flexGrow: 1,
 }));
 
 const MyNavbar = () => {
-  const classes = useStyles();
-
   const scrollToTop = () => {
     scroll.scrollToTop();
   };
 
   return (
-    <div className={classes.root}>
+    <MyNavbarContainer>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Logo
+            Your Brand
           </Typography>
           <Button color="inherit" onClick={scrollToTop}>
             Home
@@ -61,7 +55,7 @@ const MyNavbar = () => {
           </ScrollLink>
         </Toolbar>
       </AppBar>
-    </div>
+    </MyNavbarContainer>
   );
 };
 

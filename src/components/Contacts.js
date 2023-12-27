@@ -1,49 +1,48 @@
 import React from 'react';
-import { Container, Typography, Grid, TextField, Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Container, Typography, Grid, TextField, Button } from '@mui/material';
+import { styled } from '@mui/system';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(4),
-    backgroundColor: theme.palette.background.default,
-    textAlign: 'center',
-  },
-  form: {
-    width: '100%',
-    maxWidth: '400px',
-    margin: 'auto',
-  },
-  textField: {
-    marginBottom: theme.spacing(2),
-  },
-  submitButton: {
-    marginTop: theme.spacing(2),
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-    '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
-    },
+// Use the styled function to define styles
+const ContactsContainer = styled(Container)(({ theme }) => ({
+  padding: theme.spacing(4),
+  backgroundColor: theme.palette.background.default,
+  textAlign: 'center'
+}));
+
+const ContactsForm = styled('form')(({ theme }) => ({
+  width: '100%',
+  maxWidth: '400px',
+  margin: 'auto',
+}));
+
+const ContactsTextField = styled(TextField)(({ theme }) => ({
+  marginBottom: theme.spacing(2),
+}));
+
+const ContactsSubmitButton = styled(Button)(({ theme }) => ({
+  marginTop: theme.spacing(2),
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.primary.contrastText,
+  '&:hover': {
+    backgroundColor: theme.palette.primary.dark,
   },
 }));
 
 const Contacts = () => {
-  const classes = useStyles();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic
   };
 
   return (
-    <Container id="contacts" className={classes.root} maxWidth="lg">
+    <ContactsContainer id="contacts" maxWidth="lg">
       <Typography variant="h4" gutterBottom>
         Contact Us
       </Typography>
-      <form className={classes.form} onSubmit={handleSubmit}>
+      <ContactsForm onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <TextField
-              className={classes.textField}
+            <ContactsTextField
               variant="outlined"
               required
               fullWidth
@@ -52,8 +51,7 @@ const Contacts = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              className={classes.textField}
+            <ContactsTextField
               variant="outlined"
               required
               fullWidth
@@ -63,8 +61,7 @@ const Contacts = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              className={classes.textField}
+            <ContactsTextField
               variant="outlined"
               fullWidth
               label="Your Message"
@@ -74,13 +71,13 @@ const Contacts = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" className={classes.submitButton} fullWidth>
+            <ContactsSubmitButton type="submit" variant="contained" fullWidth>
               Submit
-            </Button>
+            </ContactsSubmitButton>
           </Grid>
         </Grid>
-      </form>
-    </Container>
+      </ContactsForm>
+    </ContactsContainer>
   );
 };
 

@@ -1,22 +1,23 @@
 import React from 'react';
-import { Typography, Grid, Card, CardContent } from '@material-ui/core';
+import { Typography, Grid, Card, CardContent } from '@mui/material';
 import { motion } from 'framer-motion';
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/system';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(4),
-    backgroundColor: theme.palette.background.default,
-    textAlign: 'center',
-  },
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
+// Use the styled function to define styles
+const AboutWorksContainer = styled(motion.div)(({ theme }) => ({
+  padding: theme.spacing(4),
+  backgroundColor: theme.palette.background.default,
+  textAlign: 'center',
+}));
+
+const WorksCard = styled(Card)(({ theme }) => ({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+}));
+
+const WorksCardContent = styled(CardContent)(({ theme }) => ({
+  flexGrow: 1,
 }));
 
 const worksData = [
@@ -27,8 +28,6 @@ const worksData = [
 ];
 
 const AboutWorks = () => {
-  const classes = useStyles();
-
   const containerVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
@@ -40,9 +39,8 @@ const AboutWorks = () => {
   };
 
   return (
-    <motion.div
+    <AboutWorksContainer
       id="aboutWork"
-      className={classes.root}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -54,21 +52,21 @@ const AboutWorks = () => {
         {worksData.map((work, index) => (
           <Grid item key={index} xs={12} sm={6} md={4}>
             <motion.div variants={cardVariants} initial="hidden" animate="visible">
-              <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
+              <WorksCard>
+                <WorksCardContent>
                   <Typography variant="h6" component="div">
                     {work.title}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
                     {work.description}
                   </Typography>
-                </CardContent>
-              </Card>
+                </WorksCardContent>
+              </WorksCard>
             </motion.div>
           </Grid>
         ))}
       </Grid>
-    </motion.div>
+    </AboutWorksContainer>
   );
 };
 

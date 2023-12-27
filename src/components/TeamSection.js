@@ -1,35 +1,37 @@
 import React from 'react';
-import { Typography, Grid, Card, CardContent, Avatar } from '@material-ui/core';
+import { Typography, Grid, Card, CardContent, Avatar } from '@mui/material';
 import { motion } from 'framer-motion';
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/system';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(4),
-    backgroundColor: theme.palette.background.default,
-    textAlign: 'center',
-  },
-  card: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-  },
-  avatar: {
-    width: theme.spacing(12),
-    height: theme.spacing(12),
-    marginBottom: theme.spacing(2),
-  },
+// Replace makeStyles with styled
+const TeamSectionContainer = styled('div')(({ theme }) => ({
+  padding: theme.spacing(4),
+  backgroundColor: theme.palette.background.default,
+  textAlign: 'center',
 }));
 
-const teamMembers = [
-  { name: 'Milan Anand Raj', role: 'AI Specialist', imageUrl: '/john-doe.jpg' },
-  { name: 'Divya Gupta', role: 'Data Scientist', imageUrl: '/jane-smith.jpg' },
-  // Add more team members as needed
-];
+const TeamCard = styled(Card)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  textAlign: 'center',
+  marginBottom: theme.spacing(3),
+}));
+
+const TeamAvatar = styled(Avatar)(({ theme }) => ({
+  width: theme.spacing(12),
+  height: theme.spacing(12),
+  marginBottom: theme.spacing(2),
+}));
 
 const TeamSection = () => {
-  const classes = useStyles();
+  const teamMembers = [
+    { name: 'Shubham Kumar', role: 'Founder', imageUrl: '/jane-smith.jpg' },
+    { name: 'Milan Anand Raj', role: 'CEO', imageUrl: '/john-doe.jpg' },
+    { name: 'Divya Gupta', role: 'R&D Scientist', imageUrl: '/jane-smith.jpg' },
+    { name: 'Devansh Goyal', role: 'CTO', imageUrl: '/jane-smith.jpg' },
+    // Add more team members as needed
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -44,7 +46,7 @@ const TeamSection = () => {
   return (
     <motion.div
       id="teamSection"
-      className={classes.root}
+      as={TeamSectionContainer} // Use the styled container component
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -56,15 +58,15 @@ const TeamSection = () => {
         {teamMembers.map((member, index) => (
           <Grid item key={index} xs={12} sm={6} md={4}>
             <motion.div variants={cardVariants} initial="hidden" animate="visible">
-              <Card className={classes.card}>
-                <Avatar alt={member.name} src={member.imageUrl} className={classes.avatar} />
+              <TeamCard>
+                <TeamAvatar alt={member.name} src={member.imageUrl} />
                 <CardContent>
                   <Typography variant="h6">{member.name}</Typography>
                   <Typography variant="subtitle2" color="textSecondary">
                     {member.role}
                   </Typography>
                 </CardContent>
-              </Card>
+              </TeamCard>
             </motion.div>
           </Grid>
         ))}
@@ -74,4 +76,3 @@ const TeamSection = () => {
 };
 
 export default TeamSection;
-
