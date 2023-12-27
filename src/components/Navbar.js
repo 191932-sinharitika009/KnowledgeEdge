@@ -24,7 +24,7 @@ const MyNavbar = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Your Brand
+            Logo
           </Typography>
           <Button color="inherit" onClick={scrollToTop}>
             Home

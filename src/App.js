@@ -51,7 +51,7 @@ const App = () => {
       <Contacts/>
       <Footer/>
     </Container>
-    // </ThemeProvider>
+    //  {/* </ThemeProvider> */}
   );
 };
 
